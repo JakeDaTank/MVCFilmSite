@@ -3,78 +3,49 @@ package com.skilldistillery.film.data;
 import java.util.List;
 
 public class Film {
-	String title, discription, rating;
-	int release_year, id;
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Film other = (Film) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	List<Actor> cast;
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
+	private int length;
+	private String rating, title, description;
+	public Film(int length, String rating, String title, String description, List<Actor> cast) {
+		super();
+		this.length = length;
+		this.rating = rating;
 		this.title = title;
+		this.description = description;
+		this.cast = cast;
 	}
-
-	public String getDiscription() {
-		return discription;
+	public Film(){
+		
 	}
-
-	public void setDiscription(String discription) {
-		this.discription = discription;
+	public int getLength() {
+		return length;
 	}
-
+	public void setLength(int length) {
+		this.length = length;
+	}
 	public String getRating() {
 		return rating;
 	}
-
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-
-	public int getRelease_year() {
-		return release_year;
+	public String getTitle() {
+		return title;
 	}
-
-	public void setRelease_year(int release_year) {
-		this.release_year = release_year;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public List<Actor> getCast() {
 		return cast;
 	}
-
 	public void setCast(List<Actor> cast) {
 		this.cast = cast;
 	}
-
+	private List<Actor>cast;
 }
+	
