@@ -3,7 +3,7 @@ package com.skilldistillery.film.data;
 import java.util.List;
 
 public class Film {
-	private int length;
+	private int length, ID;
 	private String rating, title, description;
 	public Film(int length, String rating, String title, String description, List<Actor> cast) {
 		super();
@@ -12,6 +12,20 @@ public class Film {
 		this.title = title;
 		this.description = description;
 		this.cast = cast;
+	}
+	public Film(int length, String rating, String title, String description) {
+		super();
+		this.length = length;
+		this.rating = rating;
+		this.title = title;
+		this.description = description;
+		
+	}
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
 	}
 	public Film(){
 		

@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class FilmDaoDBImpl implements FilmDAO {
+public class FilmDaoDBImpl implements FilmDao {
 	private static String url = "jdbc:mysql://localhost:3306/sdvid";
 	private String user = "student";
 	private String pass = "student";
@@ -36,7 +36,7 @@ public class FilmDaoDBImpl implements FilmDAO {
 				int filmid = rs.getInt(5);
 				cast = getActorsByID(filmid);
 				Film film = new Film(length, rating, title, description, cast);
-				film.setId(filmid);
+				film.setID(filmid);
 				films.add(film);
 
 			}
@@ -83,9 +83,9 @@ public class FilmDaoDBImpl implements FilmDAO {
 				length = rs.getInt(4);
 				int filmid = rs.getInt(5);
 				cast = getActorsByID(filmid);
-				Film film = new Film(length, rating, title, description, cast);
-				film.setId(filmid);
-				films.add(film);
+				Film newFilm = new Film(length, rating, title, description, cast);
+				newFilm.setID(filmid);
+				films.add(newFilm);
 			}
 			if (films.size() == 0) {
 				films = null;
@@ -106,7 +106,7 @@ public class FilmDaoDBImpl implements FilmDAO {
 		int id;
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
-			String sql2 = "SELECT first_name, last_name,id FROM actor WHERE id IN ( SELECT actor_id FROM film_actor WHERE film_id = ?)";
+			String sql2 = "SELECT first_name, last_name,id FROM actor WHERE id IN (SELECT actor_id FROM film_actor WHERE film_id = ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql2);
 			stmt.setInt(1, filmid);
 			ResultSet rs = stmt.executeQuery();
@@ -147,7 +147,7 @@ public class FilmDaoDBImpl implements FilmDAO {
 				ResultSet keys = stmt.getGeneratedKeys();
 				if (keys.next()) {
 					int newFilmId = keys.getInt(1);
-					film.setId(newFilmId);
+					film.setID(newFilmId);
 				}
 			} else {
 				film = null;
@@ -205,7 +205,7 @@ public class FilmDaoDBImpl implements FilmDAO {
 			stmt.setInt(2, film.getLength());
 			stmt.setString(3, film.getRating());
 			stmt.setString(4, film.getDescription());
-			stmt.setInt(5, film.getId());
+			stmt.setInt(5, film.getID());
 			int updateCount = stmt.executeUpdate();
 			System.out.println(updateCount);
 			conn.commit(); // COMMIT TRANSACTION

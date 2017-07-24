@@ -8,4 +8,5 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 <context:component-scan base-package="com.skilldistillery.film"></context:component-scan>
 <bean id="dao" class="com.skilldistillery.film.data.FilmDaoDBImpl"></bean>
+<mvc:annotation-driven></mvc:annotation-driven>
 </beans>
