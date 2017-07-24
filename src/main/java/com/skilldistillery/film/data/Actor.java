@@ -32,8 +32,4 @@ public class Actor {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	
-	
-
-
 }

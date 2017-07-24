@@ -57,9 +57,8 @@ Title
 <select name="film rating">
   <option value="G">G</option>
   <option value="PG">PG</option>
-  <option value="PG13">PG13</option>
+  <option value="PG-13">PG13</option>
   <option value="R">R</option>
-  <option value="NC17">Porn</option>
 </select>
 <br>Description
 <input type = "text" name= "film description">

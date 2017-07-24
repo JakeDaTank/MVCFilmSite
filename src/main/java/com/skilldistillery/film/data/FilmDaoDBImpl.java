@@ -206,9 +206,9 @@ public class FilmDaoDBImpl implements FilmDao {
 			stmt.setString(3, film.getRating());
 			stmt.setString(4, film.getDescription());
 			stmt.setInt(5, film.getID());
+			//Could send back to page to see how many items were updated
 			int updateCount = stmt.executeUpdate();
-			System.out.println(updateCount);
-			conn.commit(); // COMMIT TRANSACTION
+			conn.commit();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
