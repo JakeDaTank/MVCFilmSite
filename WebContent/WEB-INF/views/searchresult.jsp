@@ -20,7 +20,7 @@
 						<li>Length=<c:out value="${film.length}" /></li>
 						<li>Rating=<c:out value="${film.rating}" /></li>
 						<li>Description=<c:out value="${film.description}" /></li>
-						<li>Cast=<c:out value="${film.cast}" /></li>
+						<%-- <li>Cast=<c:out value="${film.cast}" /></li> --%>
 					</ul>
 					<form action="deletefilm.do" method="POST">
 						ID =<input type="number" name="id" value="${film.ID}"> <input

@@ -17,8 +17,7 @@ public class FilmController {
 	@Autowired
 	private FilmDao dao;
 
-	
-
+	// Get film by title
 	@RequestMapping(path = "getTitle.do")
 	public ModelAndView getFilmTitleById(@RequestParam(name = "filmId") Integer filmId) {
 		String viewName = "WEB-INF/views/searchresult.jsp";
@@ -27,7 +26,7 @@ public class FilmController {
 		mv.addObject("filmTitlekey", films);
 		return mv;
 	}
-
+	
 	@RequestMapping(path = "getKeyword.do")
 	public ModelAndView getFilmTitleByKeyword(@RequestParam("filmkey") String filmkey) {
 		String viewName = "WEB-INF/views/searchresult.jsp";
@@ -80,14 +79,13 @@ public class FilmController {
 	}
 	@RequestMapping(path = "deletefilm.do", method = RequestMethod.POST)
 	public ModelAndView deleteFilm(RedirectAttributes redir, @RequestParam("id") int id) {
-		String viewName = "redirect:deleteFilm2.do";
+		String viewName = "redirect:deleteFilmRedir.do";
 		ModelAndView mv = new ModelAndView(viewName);
-		//List<Film> films = dao.getFilmTitleById(id);
 		redir.addAttribute("filmid", dao.deleteFilm(id));
 		return mv;
 	}
 	
-	@RequestMapping(path = "deleteFilm2.do", method = RequestMethod.GET)
+	@RequestMapping(path = "deleteFilmRedir.do", method = RequestMethod.GET)
 	public ModelAndView deleteFilm2(RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("WEB-INF/views/deleteresult.jsp");

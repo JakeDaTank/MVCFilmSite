@@ -18,10 +18,6 @@ public class FilmDaoDBImpl implements FilmDao {
 	public List<Film> getFilmTitleById(int id) {
 		List<Film> films = new ArrayList<>();
 		List<Actor> cast = new ArrayList<>();
-		String title = null;
-		String rating = null;
-		String description = null;
-		int length;
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			String sql = "SELECT title, rating, description,length, id  FROM film WHERE id = ?";
@@ -29,13 +25,9 @@ public class FilmDaoDBImpl implements FilmDao {
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				title = rs.getString(1);
-				rating = rs.getString(2);
-				description = rs.getString(3);
-				length = rs.getInt(4);
 				int filmid = rs.getInt(5);
 				cast = getActorsByID(filmid);
-				Film film = new Film(length, rating, title, description, cast);
+				Film film = new Film(rs.getInt(4), rs.getString(2), rs.getString(1), rs.getString(3), cast);
 				film.setID(filmid);
 				films.add(film);
 
@@ -66,10 +58,6 @@ public class FilmDaoDBImpl implements FilmDao {
 		List<Film> films = new ArrayList<>();
 
 		List<Actor> cast = new ArrayList<>();
-		String title = null;
-		String rating = null;
-		String description = null;
-		int length;
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			String sql = "SELECT title, rating, description,length, id  FROM film WHERE title LIKE ?;";
@@ -77,15 +65,11 @@ public class FilmDaoDBImpl implements FilmDao {
 			stmt.setString(1, "%" + key + "%");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				title = rs.getString(1);
-				rating = rs.getString(2);
-				description = rs.getString(3);
-				length = rs.getInt(4);
 				int filmid = rs.getInt(5);
 				cast = getActorsByID(filmid);
-				Film newFilm = new Film(length, rating, title, description, cast);
-				newFilm.setID(filmid);
-				films.add(newFilm);
+				Film film = new Film(rs.getInt(4), rs.getString(2), rs.getString(1), rs.getString(3), cast);
+				film.setID(filmid);
+				films.add(film);
 			}
 			if (films.size() == 0) {
 				films = null;
@@ -101,9 +85,6 @@ public class FilmDaoDBImpl implements FilmDao {
 
 	public List<Actor> getActorsByID(int filmid) {
 		List<Actor> cast = new ArrayList<>();
-		String firstname = null;
-		String lastname = null;
-		int id;
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			String sql2 = "SELECT first_name, last_name,id FROM actor WHERE id IN (SELECT actor_id FROM film_actor WHERE film_id = ?)";
@@ -111,10 +92,7 @@ public class FilmDaoDBImpl implements FilmDao {
 			stmt.setInt(1, filmid);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				firstname = rs.getString(1);
-				lastname = rs.getString(2);
-				id = rs.getInt(3);
-				Actor actor = new Actor(id, firstname, lastname);
+				Actor actor = new Actor(rs.getInt(3), rs.getString(1), rs.getString(2));
 				cast.add(actor);
 			}
 
